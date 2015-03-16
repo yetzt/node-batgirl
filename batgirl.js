@@ -91,7 +91,7 @@ batgirl.prototype.find = function(a, b, fn){
 			});
 		};
 		
-    	debug("[find] stack is 0");
+		debug("[find] stack is 0");
 
 		// get paths to end node
 		var result = self.paths(self.nodes[b]).map(function(path){

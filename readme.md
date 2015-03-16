@@ -12,7 +12,7 @@ npm install batgirl
 
 ### batgirl(edges);
 
-Create an instance of batgirl. Edges is an array containing edges defined as pairs of nodes:
+Create an instance of batgirl. `edges` is an array containing edges defined as pairs of nodes:
 
 ```javascript
 [
@@ -24,7 +24,7 @@ Create an instance of batgirl. Edges is an array containing edges defined as pai
 
 ### batgirl.find(a, b, function(err, result))
 
-Find all shortest paths between nodes `a` and `b`. `result` is an array containing lists of nodes.
+Find all shortest paths between nodes `a` and `b`. `result` is a (possibly empty) array containing lists of nodes.
 
 ## Example
 
