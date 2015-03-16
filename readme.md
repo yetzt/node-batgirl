@@ -10,8 +10,6 @@ npm install batgirl
 
 ## API
 
-```javascript
-
 ### batgirl(edges);
 
 Create an instance of batgirl. Edges is an array containing edges defined as pairs of nodes:
