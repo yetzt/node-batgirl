@@ -1,0 +1,32 @@
+{
+  "name": "batgirl",
+  "version": "0.0.1",
+  "description": "Better Approach To Getting Interconnected Relation Lists",
+  "main": "batgirl.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yetzt/node-batgirl.git"
+  },
+  "keywords": [
+    "graph",
+    "routing",
+    "connection",
+    "distance",
+    "small",
+    "world",
+    "six",
+    "degrees",
+    "shortest",
+    "path"
+  ],
+  "author": "yetzt <node@yetzt.me> (https://github.com/yetzt)",
+  "license": "Public Domain",
+  "bugs": {
+    "url": "https://github.com/yetzt/batgirl/issues"
+  },
+  "homepage": "https://github.com/yetzt/batgirl",
+  "dependencies": {
+    "async": "^0.9.0",
+    "debug": "^2.1.3"
+  }
+}
