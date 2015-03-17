@@ -16,15 +16,9 @@ function batgirl(edges){
 		});
 	},1);
 	
-	// build node index
-	self.nodes = {};
-	edges.forEach(function(edge){
-		if (!self.nodes.hasOwnProperty(edge[0])) self.nodes[edge[0]] = { id: edge[0], neighbours:[], distance: Infinity };
-		if (!self.nodes.hasOwnProperty(edge[1])) self.nodes[edge[1]] = { id: edge[1], neighbours:[], distance: Infinity };
-		self.nodes[edge[0]].neighbours.push(self.nodes[edge[1]]);
-		self.nodes[edge[1]].neighbours.push(self.nodes[edge[0]]);
-	});
-
+	// keep edges
+	self.edges = edges;
+	
 	return this;
 };
 
@@ -42,28 +36,40 @@ batgirl.prototype.find = function(a, b, fn){
 
 	self.queue.push(function(next){
 
+		// build node index
+		var nodes = {};
+		self.edges.forEach(function(edge){
+			if (!nodes.hasOwnProperty(edge[0])) nodes[edge[0]] = { id: edge[0], neighbours:[], distance: Infinity };
+			if (!nodes.hasOwnProperty(edge[1])) nodes[edge[1]] = { id: edge[1], neighbours:[], distance: Infinity };
+			nodes[edge[0]].neighbours.push(nodes[edge[1]]);
+			nodes[edge[1]].neighbours.push(nodes[edge[0]]);
+		});
+		debug("[find] node index created with %d nodes", Object.keys(nodes).length);
+
 		// keep stack and checklist
 		var stack = [];
 		var checklist = {};
 
 		// check if nodes exist
-		if (!self.nodes.hasOwnProperty(a) || !self.nodes.hasOwnProperty(b)) {
+		if (!nodes.hasOwnProperty(a) || !nodes.hasOwnProperty(b)) {
 			debug("[find] invalid nodes: %s ↔ %s", a, b);
 			fn(new Error("Invalid nodes"));
 			next();
 		};
 
 		// set start node distance to zero
-		self.nodes[a].distance = 0;
+		nodes[a].distance = 0;
 		
 		// add start node to stack
 		if (!checklist.hasOwnProperty(a)){
-			stack.push(self.nodes[a]);
+			stack.push(nodes[a]);
 			checklist[a] = true;
 		};
 		
 		// iterate over stack to build distance index
+		var _iterations = 0;
 		while (stack.length > 0) {
+			_iterations++;
 			
 			// debug("[find] stack is %s", stack.length);
 			
@@ -91,24 +97,24 @@ batgirl.prototype.find = function(a, b, fn){
 			});
 		};
 		
-		debug("[find] stack is 0");
+		debug("[find] cleared stack after %d iterations", _iterations);
 
 		// get paths to end node
-		var result = self.paths(self.nodes[b]).map(function(path){
-			console.log("PATH", path);
+		var result = self.paths(nodes[b]).map(function(path){
 			return path.map(function(node){
 				return node.id;
 			});
 		});
+		
+		if (result.length >= 1) {
+			debug("[find] found %d results with %d links", result.length, result[0].length);
+		} else {
+			debug("[find] found no results");
+		};
 
 		// call back with result
 		fn(null, result)
-		
-		// reset data
-		Object.keys(self.nodes).forEach(function(id){
-			self.nodes[id] = { id: id, neighbours: [], distance: Infinity };
-		});
-		
+				
 		// finish queue
 		next();
 
