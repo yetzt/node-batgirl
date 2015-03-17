@@ -55,6 +55,7 @@ batgirl.prototype.find = function(a, b, fn){
 			debug("[find] invalid nodes: %s ↔ %s", a, b);
 			fn(new Error("Invalid nodes"));
 			next();
+			return;
 		};
 
 		// set start node distance to zero
