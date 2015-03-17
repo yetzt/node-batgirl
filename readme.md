@@ -22,9 +22,17 @@ Create an instance of batgirl. `edges` is an array containing edges defined as p
 ]
 ```
 
-### batgirl.find(a, b, function(err, result))
+### batgirl.find(a, b, function(err, result){})
 
 Find all shortest paths between nodes `a` and `b`. `result` is a (possibly empty) array containing lists of nodes.
+
+### batgirl.add(a, b, function(err){})
+
+Add edge with nodes `a` and `b`.
+
+### batgirl.remove(a, b, function(err){})
+
+Remove edge with nodes `a` and `b`.
 
 ## Example
 

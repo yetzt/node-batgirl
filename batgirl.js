@@ -151,4 +151,45 @@ batgirl.prototype.paths = function(node){
 	
 };
 
+// add edge
+batgirl.prototype.add = function(a, b, fn){
+	var self = this;
+
+	debug("[add] adding edge: %s ↔ %s", a, b);
+
+	// polyfill callback
+	if (typeof fn !== "function") var fn = function(){};
+
+	// remove edge first in case they are double
+	self.remove(a, b, function(err){
+		if (err) return fn(err);
+		self.edges.push([a, b]);
+		fn(null);
+	});
+
+	return this;
+};
+
+// remove edge
+batgirl.prototype.remove = function(a, b, fn){
+	var self = this;
+
+	debug("[remove] removing edge: %s ↔ %s", a, b);
+
+	// polyfill callback
+	if (typeof fn !== "function") var fn = function(){};
+
+	debug("before: %s", self.edges.length);
+
+	// filter edges
+	self.edges = self.edges.filter(function(edge){
+		if (edge[0] !== a && edge[1] !== a) return true;
+		return !((edge[0] === a && edge[1] === b) || (edge[0] === b && edge[1] === a));
+	});
+	debug("after: %s", self.edges.length);
+	fn(null);
+
+	return this;
+};
+
 module.exports = batgirl;
