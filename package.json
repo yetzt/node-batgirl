@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/yetzt/batgirl",
   "dependencies": {
-    "async": "^0.9.0",
     "debug": "^4.3.4",
+    "quu": "^0.4.2"
   }
 }

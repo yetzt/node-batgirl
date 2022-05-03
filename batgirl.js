@@ -1,20 +1,13 @@
 
 var debug = require("debug")("batgirl");
-var async = require("async");
+var quu = require("quu");
 
 function batgirl(edges){
 	if (!(this instanceof batgirl)) return new batgirl(edges);
 	var self = this;
 	
 	// queue
-	self.queue = async.queue(function(fn,next){
-		var t = Date.now();
-		debug("[queue] start");
-		fn(function(){
-			debug("[queue] finished in +%dms", (Date.now()-t));
-			next();
-		});
-	},1);
+	self.queue = quu(1);
 	
 	// keep edges
 	self.edges = edges;
