@@ -129,12 +129,12 @@ batgirl.prototype.paths = function(node){
 	var self = this;
 
 	// check if destination is reached
-   if (node.distance === 0) return [node];
+	if (node.distance === 0) return [node];
 
-   var paths = [];
+	var paths = [];
 
 	// iterate over neigbours
-   node.neighbours.forEach(function(neighbour){
+	node.neighbours.forEach(function(neighbour){
 
 		// check if neighbour has a shorter path
 		if (neighbour.distance < node.distance) {
@@ -144,10 +144,10 @@ batgirl.prototype.paths = function(node){
 				paths.push([node].concat(path));
 			});
 		};
-   });
+	});
 
 	// return result
-   return paths;
+	return paths;
 	
 };
 
