@@ -1,6 +1,6 @@
 {
   "name": "batgirl",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Better Approach To Getting Interconnected Relation Lists",
   "main": "batgirl.js",
   "repository": {
